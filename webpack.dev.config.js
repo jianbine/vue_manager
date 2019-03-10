@@ -13,6 +13,14 @@ fs.open('./src/config/env.js', 'w', function(err, fd) {
 });
 
 module.exports = merge(webpackBaseConfig, {
+    devServer: {
+        contentBase: './',
+        historyApiFallback: true,
+        port:8080,
+        inline: true,
+        hot:true,
+        compress:true
+    }, 
     devtool: '#source-map',
     output: {
         publicPath: '/dist/',
