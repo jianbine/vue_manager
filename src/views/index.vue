@@ -1,58 +1,91 @@
 <style scoped>
-    .index {
+    .layout-con{
+        height: 100%;
         width: 100%;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        text-align: center;
     }
-
-    .index h1 {
-        height: 150px;
+    .menu-item span{
+        display: inline-block;
+        overflow: hidden;
+        width: 69px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: bottom;
+        transition: width .2s ease .2s;
     }
-
-    .index h1 img {
-        height: 100%;
+    .menu-item i{
+        transform: translateX(0px);
+        transition: font-size .2s ease, transform .2s ease;
+        vertical-align: middle;
+        font-size: 16px;
     }
-
-    .index h2 {
-        color: #666;
-        margin-bottom: 200px;
+    .collapsed-menu span{
+        width: 0px;
+        transition: width .2s ease;
     }
-
-    .index h2 p {
-        margin: 0 0 50px;
-    }
-
-    .index .ivu-row-flex {
-        height: 100%;
+    .collapsed-menu i{
+        transform: translateX(5px);
+        transition: font-size .2s ease .2s, transform .2s ease .2s;
+        vertical-align: middle;
+        font-size: 22px;
     }
 </style>
 <template>
-    <div class="index">
-        <Row type="flex" justify="center" align="middle">
-            <Col span="24">
-                <h1>
-                    <img src="https://raw.githubusercontent.com/iview/iview/master/assets/logo.png">
-                </h1>
-                <h2>
-                    <p>Welcome to your iView app!</p>
-                    <Button type="ghost" @click="handleStart">Start iView</Button>
-                </h2>
-            </Col>
-        </Row>
+    <div class="layout">
+        <Layout :style="{minHeight: '100vh'}">
+            <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
+                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
+                    <MenuItem name="1-1">
+                        <Icon type="ios-navigate"></Icon>
+                        <span>面板</span>
+                    </MenuItem>
+                    <MenuItem name="1-2">
+                        <Icon type="search"></Icon>
+                        <span>表格</span>
+                    </MenuItem>
+                    <MenuItem name="1-3">
+                        <Icon type="settings"></Icon>
+                        <span>图标</span>
+                    </MenuItem>
+                </Menu>
+            </Sider>
+            <Layout>
+                <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
+                    <div>
+                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                        <span>jerry@mibine.com</span>
+                        <!-- <Icon type="ios-checkmark" /> -->
+                    </div>
+                    <div>
+                    </div>
+                </Header>
+                <Content :style="{padding: '0 16px 16px'}">
+                    <Breadcrumb :style="{margin: '16px 0'}">
+                        <BreadcrumbItem>Home</BreadcrumbItem>
+                        <BreadcrumbItem>Components</BreadcrumbItem>
+                        <BreadcrumbItem>Layout</BreadcrumbItem>
+                    </Breadcrumb>
+                    <Card>
+                        <div style="height: 600px">Content</div>
+                    </Card>
+                </Content>
+            </Layout>
+        </Layout>
     </div>
 </template>
 <script>
     export default {
-        methods: {
-            handleStart() {
-                this.$Modal.info({
-                    title: 'Bravo',
-                    content: 'Now, enjoy the convenience of iView.'
-                });
+        data () {
+            return {
+                isCollapsed: false
+            };
+        },
+        computed: {
+            menuitemClasses: function () {
+                return [
+                    'menu-item',
+                    this.isCollapsed ? 'collapsed-menu' : ''
+                ]
             }
         }
-    };
+    }
 </script>
