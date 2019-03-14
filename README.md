@@ -28,3 +28,6 @@ npm run build
 (1)降低node版本
 
 (2)修改node fs.write模块的是使用方法
+
+#问题记录
+1、左侧菜单栏打开不能用

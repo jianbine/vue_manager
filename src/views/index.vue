@@ -34,30 +34,18 @@
         <Layout :style="{minHeight: '100vh'}">
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
 
-                <div style="height: 64px;">
+                <div style="height: 64px;
+                    color: white;
+                    text-align: center;
+                    font-size: 42px;
+                    border-bottom: 1px solid;">
+                    Logo
                 </div>
                 <Menu theme="dark" width="auto"
                       :class="menuitemClasses"
                       :accordion="true"
                       active-key="0"
                       :open-keys="[0]">
-                    <!--<Submenu key="1">-->
-                        <!--<template slot="title">-->
-                            <!--<Icon type="ios-paper"></Icon>-->
-                            <!--内容管理-->
-                        <!--</template>-->
-                        <!--<Menu-item key="1-1">文章管理</Menu-item>-->
-                        <!--<Menu-item key="1-2">评论管理</Menu-item>-->
-                        <!--<Menu-item key="1-3">举报管理</Menu-item>-->
-                    <!--</Submenu>-->
-                    <!--<Submenu key="2">-->
-                        <!--<template slot="title">-->
-                            <!--<Icon type="ios-people"></Icon>-->
-                            <!--用户管理-->
-                        <!--</template>-->
-                        <!--<Menu-item key="2-1">新增用户</Menu-item>-->
-                        <!--<Menu-item key="2-2">活跃用户</Menu-item>-->
-                    <!--</Submenu>-->
                     <template v-for="(item,index) in menus">
                         <Submenu :key="index" :name="index">
                             <template slot="title">
@@ -81,16 +69,13 @@
                     <div>
                     </div>
                 </Header>
-                <Content :style="{padding: '0 16px 16px'}">
-                    <Breadcrumb :style="{margin: '16px 0'}">
-                        <BreadcrumbItem>Home</BreadcrumbItem>
-                        <BreadcrumbItem>Components</BreadcrumbItem>
-                        <BreadcrumbItem>Layout</BreadcrumbItem>
-                    </Breadcrumb>
+                <Content :style="{padding: '16px'}">
                     <Card>
                         <div style="height: 600px">Content</div>
                     </Card>
+                    <router-view></router-view>
                 </Content>
+                
             </Layout>
         </Layout>
     </div>
@@ -99,6 +84,7 @@
     export default {
         data () {
             return {
+                //用来左边菜单栏关闭显示
                 isCollapsed: false,
                 menus: [{
                     name: "面板",
