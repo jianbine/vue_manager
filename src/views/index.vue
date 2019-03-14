@@ -33,19 +33,42 @@
     <div class="layout">
         <Layout :style="{minHeight: '100vh'}">
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
-                        <Icon type="ios-navigate"></Icon>
-                        <span>面板</span>
-                    </MenuItem>
-                    <MenuItem name="1-2">
-                        <Icon type="search"></Icon>
-                        <span>表格</span>
-                    </MenuItem>
-                    <MenuItem name="1-3">
-                        <Icon type="settings"></Icon>
-                        <span>图标</span>
-                    </MenuItem>
+
+                <div style="height: 64px;">
+                </div>
+                <Menu theme="dark" width="auto"
+                      :class="menuitemClasses"
+                      :accordion="true"
+                      active-key="0"
+                      :open-keys="[0]">
+                    <!--<Submenu key="1">-->
+                        <!--<template slot="title">-->
+                            <!--<Icon type="ios-paper"></Icon>-->
+                            <!--内容管理-->
+                        <!--</template>-->
+                        <!--<Menu-item key="1-1">文章管理</Menu-item>-->
+                        <!--<Menu-item key="1-2">评论管理</Menu-item>-->
+                        <!--<Menu-item key="1-3">举报管理</Menu-item>-->
+                    <!--</Submenu>-->
+                    <!--<Submenu key="2">-->
+                        <!--<template slot="title">-->
+                            <!--<Icon type="ios-people"></Icon>-->
+                            <!--用户管理-->
+                        <!--</template>-->
+                        <!--<Menu-item key="2-1">新增用户</Menu-item>-->
+                        <!--<Menu-item key="2-2">活跃用户</Menu-item>-->
+                    <!--</Submenu>-->
+                    <template v-for="(item,index) in menus">
+                        <Submenu :key="index" :name="index">
+                            <template slot="title">
+                                <Icon :type="item.image"></Icon>
+                                {{ item.name }}
+                            </template>
+                            <template v-for="(smallItem,index1) in item.children">
+                                <Menu-item :name="smallKey(index,index1)" :key="smallKey(index,index1)">{{ smallItem.name }}</Menu-item>
+                            </template>
+                        </Submenu>
+                    </template>
                 </Menu>
             </Sider>
             <Layout>
@@ -76,8 +99,87 @@
     export default {
         data () {
             return {
-                isCollapsed: false
+                isCollapsed: false,
+                menus: [{
+                    name: "面板",
+                    image: "ios-people",
+                    language: "xxxx",
+                    leaf: false,
+                    root: true,
+                    show: true,
+                    children: [{
+                        name: "面板中心",
+                        image: "ios-people",
+                        language: "xxxx",
+                        leaf: false,
+                        root: true,
+                        show: true,
+                    }]
+                },{
+                    name: "用户管理",
+                    image: "ios-people",
+                    language: "xxxx",
+                    leaf: false,
+                    root: true,
+                    show: false,
+                    children: [{
+                        name: "用户列表",
+                        image: "ios-people",
+                        language: "xxxx",
+                        leaf: false,
+                        root: true,
+                        show: true,
+                    },{
+                        name: "修改密码",
+                        image: "ios-people",
+                        language: "xxxx",
+                        leaf: false,
+                        root: true,
+                        show: true,
+                    }]
+                },{
+                    name: "图表",
+                    image: "ios-people",
+                    language: "xxxx",
+                    leaf: false,
+                    root: true,
+                    show: false,
+                },{
+                    name: "列表",
+                    image: "ios-people",
+                    language: "xxxx",
+                    leaf: false,
+                    root: true,
+                    show: false,
+                },{
+                    name: "组件",
+                    image: "ios-people",
+                    language: "xxxx",
+                    leaf: false,
+                    root: true,
+                    show: false,
+                    children: [{
+                        name: "表单",
+                        image: "ios-people",
+                        language: "xxxx",
+                        leaf: false,
+                        root: true,
+                        show: true,
+                    },{
+                        name: "视图",
+                        image: "ios-people",
+                        language: "xxxx",
+                        leaf: false,
+                        root: true,
+                        show: true,
+                    }]
+                }]
             };
+        },
+        methods: {
+            smallKey: function (key1, key2) {
+                return key1 + "-" +key2
+            }
         },
         computed: {
             menuitemClasses: function () {
@@ -85,7 +187,7 @@
                     'menu-item',
                     this.isCollapsed ? 'collapsed-menu' : ''
                 ]
-            }
+            },
         }
     }
 </script>
