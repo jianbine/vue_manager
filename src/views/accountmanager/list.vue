@@ -1,9 +1,9 @@
 <template>
     <div>
-        <i-table :content="self" :data="tableData1" :columns="tableColumns1" stripe></i-table>
+        <i-table :content="self" :data="showDatas" :columns="tableColumns" stripe border ></i-table>
         <div style="margin: 10px;overflow: hidden">
             <div style="float: right;">
-                <Page :total="100" :current="1" @on-change="changePage"></Page>
+                <Page :total="computeDataTotal" :current="currentPage" @on-change="changePage"></Page>
             </div>
         </div>
     </div>
@@ -13,90 +13,90 @@
         data () {
             return {
                 self: this,
-                tableData1: this.mockTableData1(),
-                tableColumns1: [
+                tableData: this.mockTableData(),
+                pageTotal: 0,
+                currentPage: 1,
+                showItemCount: 10,
+                showDatas: [],
+                tableColumns: [
                     {
-                        title: '名称',
-                        key: 'name'
+                        title: '选中框',
+                        key: 'select',
+                        type: 'selection',
+                        width: 58,
+                        align: 'center',
                     },
                     {
                         title: '状态',
                         key: 'status',
-                        render (row) {
-                            const color = row.status == 1 ? 'blue' : row.status == 2 ? 'green' : 'red';
-                            const text = row.status == 1 ? '构建中' : row.status == 2 ? '构建完成' : '构建失败';
-                            return `<tag type="dot" color="${color}">${text}</tag>`;
-                        }
+                        sortable: true,
+                        align: 'center',
+                        // render (row) {
+                        //     return row.status;
+                        // }
                     },
                     {
-                        title: '画像内容',
-                        key: 'portrayal',
+                        title: '邮箱',
+                        key: 'email',
+                        sortable: true,
+                        align: 'center',
+                    },
+                    {
+                        title: '手机号码',
+                        key: 'phone',
+                        sortable: true,
+                        align: 'center',
+                    },
+                    {
+                        title: '角色',
+                        key: 'role',
+                        sortable: true,
+                        align: 'center',
+                        // render (row) {
+                        //     return `普通用户`
+                        // }
+                    },
+                    {
+                        title: '创建时间',
+                        key: 'createTime',
+                        sortable: true,
+                        align: 'center',
+                    },
+                    {
+                        title: '操作',
+                        key: 'action',
+                        width: 150,
+                        align: 'center',
                         render (row, column, index) {
-                            return `<Poptip trigger="hover" title="${row.portrayal.length}个画像" placement="bottom">
-                                        <tag>${row.portrayal.length}</tag>
-                                        <div slot="content">
-                                            <ul><li v-for="item in tableData1[${index}].portrayal" style="text-align: center;padding: 4px">{{ item }}</li></ul>
-                                        </div>
-                                    </Poptip>`;
-                        }
-                    },
-                    {
-                        title: '选定人群数',
-                        key: 'people',
-                        render (row, column, index) {
-                            return `<Poptip trigger="hover" title="${row.people.length}个客群" placement="bottom">
-                                        <tag>${row.people.length}</tag>
-                                        <div slot="content">
-                                            <ul><li v-for="item in tableData1[${index}].people" style="text-align: center;padding: 4px">{{ item.n }}：{{ item.c }}人</li></ul>
-                                        </div>
-                                    </Poptip>`;
-                        }
-                    },
-                    {
-                        title: '取样时段',
-                        key: 'time',
-                        render (row) {
-                            return `近${row.time}天`
-                        }
-                    },
-                    {
-                        title: '更新时间',
-                        key: 'update',
-                        render (row, column, index) {
-                            return `{{ formatDate(tableData1[${index}].update) }}`;
+                            return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
                         }
                     }
                 ]
             }
         },
+        mounted () {
+            //初始化表格数据
+            this.computeShowData();
+        },
         methods: {
-            mockTableData1 () {
+            //模拟获取数据
+            mockTableData () {
                 let data = [];
-                for (let i = 0; i < 10; i++) {
+                for (let i = 0; i < 100; i++) {
                     data.push({
-                        name: '商圈' + Math.floor(Math.random () * 100 + 1),
-                        status: Math.floor(Math.random () * 3 + 1),
-                        portrayal: ['城市渗透', '人群迁移', '消费指数', '生活指数', '娱乐指数'],
-                        people: [
-                            {
-                                n: '客群' + Math.floor(Math.random () * 100 + 1),
-                                c: Math.floor(Math.random () * 1000000 + 100000)
-                            },
-                            {
-                                n: '客群' + Math.floor(Math.random () * 100 + 1),
-                                c: Math.floor(Math.random () * 1000000 + 100000)
-                            },
-                            {
-                                n: '客群' + Math.floor(Math.random () * 100 + 1),
-                                c: Math.floor(Math.random () * 1000000 + 100000)
-                            }
-                        ],
-                        time: Math.floor(Math.random () * 7 + 1),
-                        update: new Date()
+                        select: i + 1,
+                        status: Math.round(Math.random()) == 1 ? "正常" : "不正常",
+                        email: new Date().getTime() + "@test.com",
+                        phone: new Date().getTime() + 1,
+                        role: Math.round(Math.random()) == 0 ? "超级管理员" : "普通管理员",
+                        // createTime: Mock.Random.date('yyyy-MM-dd'),
+                        createTime: this.formatDate(new Date()),
+                        action: '',
                     })
                 }
                 return data;
             },
+            //格式化日期
             formatDate (date) {
                 const y = date.getFullYear();
                 let m = date.getMonth() + 1;
@@ -105,10 +105,27 @@
                 d = d < 10 ? ('0' + d) : d;
                 return y + '-' + m + '-' + d;
             },
+            //点击改变页码
             changePage () {
-                // 这里直接更改了模拟的数据，真实使用场景应该从服务端获取数据
-                this.tableData1 = this.mockTableData1();
-            }
+                //修改当前页数
+                this.computeShowData()
+            },
+            //要显示的数据
+            computeShowData () {
+                let current = 1;
+                let showItemCount = this.showItemCount;
+                let start = (current - 1) * showItemCount;
+                let end = start + showItemCount;
+                //splice会删除原有数组项，复制一份
+                let tmpTableData = this.tableData;
+                this.showDatas = tmpTableData.splice(start, end);
+            },
+        },
+        computed: {
+            //获取列表总页数
+            computeDataTotal () {
+                return this.tableData.length;
+            },
         }
     }
 </script>

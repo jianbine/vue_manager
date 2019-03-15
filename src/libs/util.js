@@ -5,7 +5,7 @@ let util = {
 
 };
 util.title = function(title) {
-    title = title ? title + ' - Home' : 'Vue Manage';
+    title = title ? title : 'Vue Manage';
     window.document.title = title;
 };
 

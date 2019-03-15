@@ -53,7 +53,12 @@
                                 {{ item.name }}
                             </template>
                             <template v-for="(smallItem,index1) in item.children">
-                                <Menu-item :name="smallKey(index,index1)" :key="smallKey(index,index1)">{{ smallItem.name }}</Menu-item>
+                                <router-link :to="{ name: smallItem.urlName}">
+                                    <Menu-item :name="smallKey(index,index1)" :key="smallKey(index,index1)">
+                                        <!--{{ smallItem.name }}-->
+                                        {{ smallItem.name }}
+                                    </Menu-item>
+                                </router-link>
                             </template>
                         </Submenu>
                     </template>
@@ -71,9 +76,10 @@
                 </Header>
                 <Content :style="{padding: '16px'}">
                     <Card>
-                        <div style="height: 600px">Content</div>
+                        <!--<div style="height: 600px">Content</div>-->
+
+                        <router-view></router-view>
                     </Card>
-                    <router-view></router-view>
                 </Content>
                 
             </Layout>
@@ -100,6 +106,8 @@
                         leaf: false,
                         root: true,
                         show: true,
+                        url: '/board',
+                        urlName: 'board'
                     }]
                 },{
                     name: "用户管理",
@@ -115,6 +123,8 @@
                         leaf: false,
                         root: true,
                         show: true,
+                        url: '/accountmanager/list',
+                        urlName: 'accountlist'
                     },{
                         name: "修改密码",
                         image: "ios-people",
@@ -122,6 +132,7 @@
                         leaf: false,
                         root: true,
                         show: true,
+                        url: '/board'
                     }]
                 },{
                     name: "图表",
