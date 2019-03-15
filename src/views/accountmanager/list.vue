@@ -84,12 +84,11 @@
                 let data = [];
                 for (let i = 0; i < 100; i++) {
                     data.push({
-                        select: i + 1,
+                        select: '',
                         status: Math.round(Math.random()) == 1 ? "正常" : "不正常",
                         email: new Date().getTime() + "@test.com",
                         phone: new Date().getTime() + 1,
                         role: Math.round(Math.random()) == 0 ? "超级管理员" : "普通管理员",
-                        // createTime: Mock.Random.date('yyyy-MM-dd'),
                         createTime: this.formatDate(new Date()),
                         action: '',
                     })
@@ -106,19 +105,18 @@
                 return y + '-' + m + '-' + d;
             },
             //点击改变页码
-            changePage () {
-                //修改当前页数
-                this.computeShowData()
+            changePage (index) {
+                this.currentPage = index;
+                this.computeShowData();
             },
             //要显示的数据
             computeShowData () {
-                let current = 1;
+                let current = this.currentPage;
                 let showItemCount = this.showItemCount;
                 let start = (current - 1) * showItemCount;
                 let end = start + showItemCount;
-                //splice会删除原有数组项，复制一份
-                let tmpTableData = this.tableData;
-                this.showDatas = tmpTableData.splice(start, end);
+                console.log("当前页数" + current);
+                this.showDatas = this.tableData.slice(start, end);
             },
         },
         computed: {
