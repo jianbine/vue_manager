@@ -1,5 +1,15 @@
+<style scoped>
+
+</style>
 <template>
     <div>
+        <div>
+            <label for="email">Email:&nbsp;</label><i-input style="width: 200px;margin-right: 5%" id="email" size="large" placeholder="please enter the email address"></i-input>
+            <label for="name">Name:&nbsp;</label><i-input style="width: 200px" id="name" size="large" placeholder="please enter the name"></i-input>
+        </div>
+        <div style="text-align: right;margin: 10px 0px;">
+            <i-button type="primary" icon="ios-search">搜索</i-button>
+        </div>
         <i-table :content="self" :data="showDatas" :columns="tableColumns" stripe border ></i-table>
         <div style="margin: 10px;overflow: hidden">
             <div style="float: right;">
