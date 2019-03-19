@@ -29,6 +29,37 @@ npm run build
 
 (2)修改node fs.write模块的是使用方法
 
+2、
+
+问题：ivew table i-button组件使用没有任何效果
+
+解决方法：
+
+采用箭头函数方式替代原有官方写法
+
+官方写法：
+
+````
+render (row, column, index) {
+    return `<i-button type="primary" size="small" @click="show(${index})">查看</i-button> <i-button type="error" size="small" @click="remove(${index})">删除</i-button>`;
+},
+````
+
+替换后写法：
+
+````
+render: (h, params) => {
+    return h('div', [
+    h('i-button',{
+        style:{
+            marginRight: '10px'
+        }
+    },'查看详情'),
+    h('i-button','删除'),
+    ]);
+},
+````
+
 # 问题记录
 1、左侧菜单栏打开不能用
 
@@ -36,8 +67,10 @@ npm run build
 
 3、后期数据用mock.js模拟请求使用（插件已引入）
 
-4、用户列表操作项无法显示
+4、用户列表操作项无法显示（解决）
 
 5、用户列表实现分页（解决）
 
 6、表格点击分页时，底部页数会减少（解决，splice改用slide）
+
+7、获取当前元素的属性（使用ref,给相应的元素加ref=“name” 然后再this.$refs.name获取到该元素）
