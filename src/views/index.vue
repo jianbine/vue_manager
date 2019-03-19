@@ -44,20 +44,20 @@
                 <Menu theme="dark" width="auto"
                       :class="menuitemClasses"
                       :accordion="true"
-                      active-key="0"
-                      :open-keys="[0]">
+                      :active-name="computeActiveName.activeName"
+                      :open-names="computeActiveName.openName">
                     <template v-for="(item,index) in menus">
-                        <Submenu :key="index" :name="index">
+                        <Submenu :name="index">
                             <template slot="title">
                                 <Icon :type="item.image"></Icon>
                                 {{ item.name }}
                             </template>
                             <template v-for="(smallItem,index1) in item.children">
                                 <router-link :to="{ name: smallItem.urlName}">
-                                    <Menu-item :name="smallKey(index,index1)" :key="smallKey(index,index1)">
+                                    <MenuItem :name="smallKey(index,index1)">
                                         <!--{{ smallItem.name }}-->
                                         {{ smallItem.name }}
-                                    </Menu-item>
+                                    </MenuItem>
                                 </router-link>
                             </template>
                         </Submenu>
@@ -66,18 +66,17 @@
             </Sider>
             <Layout>
                 <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
-                    <div>
+                    <div style="text-align:right">
                         <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                         <span>jerry@mibine.com</span>
-                        <!-- <Icon type="ios-checkmark" /> -->
+                        <Icon type="ios-exit-outline" />
+                        <!--<img src="https://i.loli.net/2017/08/21/599a521472424.jpg" width="30px" style="vertical-align: middle" alt="">-->
                     </div>
                     <div>
                     </div>
                 </Header>
                 <Content :style="{padding: '16px'}">
                     <Card>
-                        <!--<div style="height: 600px">Content</div>-->
-
                         <router-view></router-view>
                     </Card>
                 </Content>
@@ -132,7 +131,8 @@
                         leaf: false,
                         root: true,
                         show: true,
-                        url: '/board'
+                        url: '/accountmanager/changeModify',
+                        urlName: 'changemodify'
                     }]
                 },{
                     name: "图表",
@@ -185,6 +185,27 @@
                     this.isCollapsed ? 'collapsed-menu' : ''
                 ]
             },
+            //计算菜单栏打开状态
+            computeActiveName: function () {
+                let pathname = window.location.pathname;
+                let currentObj = {
+                    activeName: '0-0',
+                    openName: [0],
+                };
+                this.menus.forEach(function (value, index) {
+                    if(value.children){
+                        value.children.forEach(function (val, key) {
+                            if(val.url && val.url == pathname){
+                                currentObj.activeName = index + '-' + key;
+                                currentObj.openName = [index];
+                                return false;
+                            }
+                        });
+                    }
+                });
+
+                return currentObj;
+            }
         }
     }
 </script>
