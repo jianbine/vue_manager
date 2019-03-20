@@ -3,6 +3,10 @@
 </style>
 <template>
     <div>
+        <Breadcrumb>
+            <BreadcrumbItem to="/">用户管理</BreadcrumbItem>
+            <BreadcrumbItem to="/accountmanager/list">用户列表</BreadcrumbItem>
+        </Breadcrumb>
         <!-- 弹窗使用 -->
         <Modal
                 v-model="modal1"
@@ -30,7 +34,7 @@
                 <Button type="primary" size="large" long  @click="operate" ref="operate" :whetherType="whetherType">{{ modalBtnText }}</Button>
             </div>
         </Modal>
-        <div>
+        <div class="row">
             <label for="email">Email:&nbsp;</label><i-input style="width: 200px;margin-right: 5%" id="email" size="large" placeholder="please enter the email address"></i-input>
             <label for="name">Name:&nbsp;</label><i-input style="width: 200px" id="name" size="large" placeholder="please enter the name"></i-input>
         </div>

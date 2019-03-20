@@ -69,8 +69,7 @@
                     <div style="text-align:right">
                         <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
                         <span>jerry@mibine.com</span>
-                        <Icon type="ios-exit-outline" />
-                        <!--<img src="https://i.loli.net/2017/08/21/599a521472424.jpg" width="30px" style="vertical-align: middle" alt="">-->
+                        <router-link to="/login"><Icon type="log-out" style="font-size: 30px;vertical-align: middle;margin-left: 10px;"></Icon></router-link>
                     </div>
                     <div>
                     </div>
@@ -93,7 +92,7 @@
                 isCollapsed: false,
                 menus: [{
                     name: "面板",
-                    image: "ios-people",
+                    image: "ios-speedometer",
                     language: "xxxx",
                     leaf: false,
                     root: true,
@@ -131,26 +130,26 @@
                         leaf: false,
                         root: true,
                         show: true,
-                        url: '/accountmanager/changeModify',
-                        urlName: 'changemodify'
+                        url: '/accountmanager/changepassword',
+                        urlName: 'changepassword'
                     }]
                 },{
                     name: "图表",
-                    image: "ios-people",
+                    image: "stats-bars",
                     language: "xxxx",
                     leaf: false,
                     root: true,
                     show: false,
                 },{
                     name: "列表",
-                    image: "ios-people",
+                    image: "navicon",
                     language: "xxxx",
                     leaf: false,
                     root: true,
                     show: false,
                 },{
                     name: "组件",
-                    image: "ios-people",
+                    image: "android-compass",
                     language: "xxxx",
                     leaf: false,
                     root: true,
@@ -192,6 +191,11 @@
                     activeName: '0-0',
                     openName: [0],
                 };
+                //如果是直接访问地址，默认跳转到菜单栏首项
+                if(pathname == '/'){
+                    // console.info()
+                   this.$router.push(this.menus[0]['children'][0]['urlName'])
+                }
                 this.menus.forEach(function (value, index) {
                     if(value.children){
                         value.children.forEach(function (val, key) {
