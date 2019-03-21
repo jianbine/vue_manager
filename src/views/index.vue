@@ -191,11 +191,6 @@
                     activeName: '0-0',
                     openName: [0],
                 };
-                //如果是直接访问地址，默认跳转到菜单栏首项
-                if(pathname == '/'){
-                    // console.info()
-                   this.$router.push(this.menus[0]['children'][0]['urlName'])
-                }
                 this.menus.forEach(function (value, index) {
                     if(value.children){
                         value.children.forEach(function (val, key) {

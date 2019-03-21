@@ -44,6 +44,12 @@ const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
+
+    let pathname = to.path;
+    if(pathname == '/'){
+        next('/board');
+    }
+
     Util.title(to.meta.title);
     next();
 });
