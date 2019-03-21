@@ -56,7 +56,7 @@
     </div>
 </template>
 <script>
-
+    // import { fetchList } from "../../api/user";
     import User from "../../mock/user";
 
     export default {
@@ -181,7 +181,7 @@
         mounted () {
             //初始化表格数据
             this.computeShowData();
-            //接口请求方式
+            // //接口请求方式
             // fetchList().then(response => {
             //     console.info(response);
             // });

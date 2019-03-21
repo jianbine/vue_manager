@@ -5,11 +5,11 @@ const merge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.base.config.js');
 const fs = require('fs');
 
-fs.open('./src/config/env.js', 'w', function(err, fd) {
-    const buf = 'export default "production";';
-    // fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
-    fs.write(fd, buf, 0, 'utf-8', function(err, written, buffer) {});
-});
+// fs.open('./src/config/env.js', 'w', function(err, fd) {
+//     const buf = 'export default "production";';
+//     // fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {});
+//     fs.write(fd, buf, 0, 'utf-8', function(err, written, buffer) {});
+// });
 
 module.exports = merge(webpackBaseConfig, {
     output: {
@@ -18,6 +18,9 @@ module.exports = merge(webpackBaseConfig, {
         chunkFilename: '[name].[hash].chunk.js'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': require('./config/prod.env')
+        }),
         new ExtractTextPlugin({
             filename: '[name].[hash].css',
             allChunks: true
