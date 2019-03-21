@@ -56,6 +56,9 @@
     </div>
 </template>
 <script>
+
+    import User from "../../mock/user";
+
     export default {
         data () {
             return {
@@ -178,6 +181,10 @@
         mounted () {
             //初始化表格数据
             this.computeShowData();
+            //接口请求方式
+            // fetchList().then(response => {
+            //     console.info(response);
+            // });
         },
         methods: {
             //选择是否确认删除
@@ -217,19 +224,19 @@
             },
             //模拟获取数据
             mockTableData () {
-                let data = [];
-                for (let i = 0; i < 100; i++) {
-                    data.push({
-                        select: '',
-                        status: Math.round(Math.random()) == 1 ? "正常" : "不正常",
-                        email: new Date().getTime() + "@test.com",
-                        username: new Date().getTime() + "test.com",
-                        phone: new Date().getTime() + 1,
-                        role: Math.round(Math.random()) == 0 ? "超级管理员" : "普通管理员",
-                        createTime: this.formatDate(new Date()),
-                    })
-                }
-                return data;
+                // let data = [];
+                // for (let i = 0; i < 100; i++) {
+                //     data.push({
+                //         id: '',
+                //         status: Math.round(Math.random()) == 1 ? "正常" : "不正常",
+                //         email: new Date().getTime() + "@test.com",
+                //         username: new Date().getTime() + "test.com",
+                //         phone: new Date().getTime() + 1,
+                //         role: Math.round(Math.random()) == 0 ? "超级管理员" : "普通管理员",
+                //         createTime: this.formatDate(new Date()),
+                //     })
+                // }
+                return User.getList();
             },
             //格式化日期
             formatDate (date) {

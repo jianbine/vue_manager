@@ -12,8 +12,6 @@ import Locales from './locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
 
-//引入全局mock.js插件，生成模拟数据
-import Mock from 'mockjs';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -44,7 +42,7 @@ const router = new VueRouter(RouterConfig);
 
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
-
+    //设定默认路由
     let pathname = to.path;
     if(pathname == '/'){
         next('/board');
