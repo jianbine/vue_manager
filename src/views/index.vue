@@ -35,7 +35,8 @@
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
 
                 <div style="height: 64px;
-                    color: white;
+                    color: darkgray;
+                    background-color: white;
                     text-align: center;
                     font-size: 42px;
                     border-bottom: 1px solid;">
