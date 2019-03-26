@@ -78,9 +78,9 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue'],
         alias: {
-            'vue': 'vue/dist/vue.esm.js',
             //自定义引用目录
-            '@': resolve('src')
+            '@': resolve('src'),
+            'vue': 'vue/dist/vue.esm.js',
         }
     }
 };

@@ -57,7 +57,7 @@
 </template>
 <script>
     // import { fetchList } from "../../api/user";
-    import User from "../../mock/user";
+    import User from "@/mock/user";
 
     export default {
         data () {

@@ -48,8 +48,7 @@
 
 <script>
     import echarts from 'echarts';
-    // import { getCpuData, getMemoryData, getStorageData, getUseData, getNetworkData } from '../../mock/echartdata';
-    import EchartData from '../../mock/echartdata';
+    import EchartData from '@/mock/echartdata';
 
     export default {
         data () {
