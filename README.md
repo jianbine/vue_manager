@@ -62,7 +62,18 @@ render: (h, params) => {
 
 3、
 
-问题：vue中import使用@替代绝对路径前缀报错，找不到模块
+问题：打包部署后部署在服务器上404
+
+原因：iView原来默认配置是使用history模式的router，可以在main.js文件中查看配置
+
+分析：history模式访问的url不带#，而hash模式的url访问都会带#
+
+解决方法：
+
+如果使用history模式，需要配置服务端，详细见https://router.vuejs.org/zh/guide/essentials/history-mode.html
+
+如果使用hash模式，就不需要配置服务端，只是url中带#显得奇怪
+
 
 # 问题记录
 1、左侧菜单栏打开不能用（解决）
@@ -115,8 +126,6 @@ render: (h, params) => {
 
 25、面板中心改成监测中心（解决）
 
-26、打包部署
+26、本地资源引用
 
-27、本地资源引用
-
-28、全局配置@替代src绝对路径（解决）
+27、全局配置@替代src绝对路径（解决）
