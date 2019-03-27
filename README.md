@@ -74,6 +74,17 @@ render: (h, params) => {
 
 如果使用hash模式，就不需要配置服务端，只是url中带#显得奇怪
 
+4、
+
+问题：本地静态资源引用问题
+
+分析：本地资源一般分为assets和static(和src同级)目录，在不同目录下有的区别是：assets可以使用相对路径，但是webpack需引入url-loader，而static路径则不一样，用绝对路径即可。
+
+解决方法：
+
+assets目录：引入url-loader插件（待补充）
+
+static目录使用绝对路径，如：/static/xxxxx（此项目可以参考管理系统右上方avator引用）
 
 # 问题记录
 1、左侧菜单栏打开不能用（解决）
@@ -94,7 +105,7 @@ render: (h, params) => {
 
 9、用户列表搜索按钮功能添加
 
-10、图标Demo创建（ECharts|Highcharts）
+10、图表Demo创建（ECharts|Highcharts -- 解决）
 
 11、登陆界面编写
 
@@ -116,7 +127,7 @@ render: (h, params) => {
 
 20、页面校验机制总结
 
-21、404页面优化编写
+21、404页面优化编写（初步想法，直接404图片引用）
 
 22、webpack-dev-server 版本警告
  
@@ -126,6 +137,10 @@ render: (h, params) => {
 
 25、面板中心改成监测中心（解决）
 
-26、本地资源引用
+26、本地资源引用（解决）
 
 27、全局配置@替代src绝对路径（解决）
+
+28、自定义模态框组件，模拟alert弹窗
+
+29、i18n使用

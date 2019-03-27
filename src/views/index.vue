@@ -68,7 +68,7 @@
             <Layout>
                 <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
                     <div style="text-align:right">
-                        <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+                        <Avatar src="/static/avator.jpg" />
                         <span>jerry@mibine.com</span>
                         <router-link to="/login"><Icon type="log-out" style="font-size: 30px;vertical-align: middle;margin-left: 10px;"></Icon></router-link>
                     </div>
