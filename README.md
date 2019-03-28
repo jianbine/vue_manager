@@ -115,7 +115,7 @@ static目录使用绝对路径，如：/static/xxxxx（此项目可以参考管�
 
 10、图表Demo创建（ECharts|Highcharts -- 解决）
 
-11、登陆界面编写
+11、登陆界面编写（解决）
 
 12、注册界面编写
 
