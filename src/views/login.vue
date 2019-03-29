@@ -30,6 +30,7 @@
 
     import Account from '@/mock/account';
     import md5 from 'js-md5';
+    import { setToken } from '@/utils/auth';
 
     export default {
         data () {
@@ -62,7 +63,8 @@
                 }
                 //如果用户存在，进入到首页
                 //存储当前用户信息，并登录到首页
-                this.$router.push({name:"/"});
+                let tokenStatus = setToken(username);
+                this.$router.push({ path:"/" });
             }
         },
         computed: {

@@ -12,6 +12,7 @@ import Locales from './locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
 
+import { getToken } from '@/utils/auth.js';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
@@ -40,16 +41,52 @@ const RouterConfig = {
 };
 const router = new VueRouter(RouterConfig);
 
+const whiteList = ['/login'];
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
-    //设定默认路由
-    let pathname = to.path;
-    if(pathname == '/'){
-        next('/board');
-    }
 
     Util.title(to.meta.title);
-    next();
+
+    const hasToken = getToken();
+
+    if(hasToken){
+        let pathname = to.path;
+        if(pathname == '/'){
+            next({name:'board'});
+        }
+        next();
+    }else{
+
+        if(to.path == '/') {
+            next({ path: '/login' });
+        }
+        //如果再白名单内，直接打开页面
+        if(whiteList.indexOf(to.path) > -1) {
+            next();
+        }else{
+            next({ path: '/login' });
+        }
+            // console.info()
+        // if(to.path == '/' || whiteList.indexOf(to.path) > -1){
+        //     // next({ path: '/login' });
+        // }else{
+        //     console.info(to.path);
+        //     next({ path: '/' });
+        // }
+        // let pathname = to.path;
+        // if(pathname == '/'){
+        //     next('/board');
+        // }else{
+        //     next();
+        // }
+    }
+
+    // //设定默认路由
+    // let pathname = to.path;
+    // if(pathname == '/'){
+    //     next('/board');
+    // }
+
 });
 
 router.afterEach(() => {
