@@ -147,7 +147,16 @@
                     language: "xxxx",
                     leaf: false,
                     root: true,
-                    show: false,
+                    show: false,children: [{
+                        name: "用户列表",
+                        image: "ios-people",
+                        language: "xxxx",
+                        leaf: false,
+                        root: true,
+                        show: true,
+                        url: '/accountmanager/list1',
+                        urlName: 'accountlist1'
+                    }]
                 },{
                     name: "组件",
                     image: "android-compass",

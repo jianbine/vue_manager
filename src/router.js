@@ -26,7 +26,14 @@ const routers = [{
                 title: '用户列表'
             },
             component: (resolve) => require(['./views/accountmanager/changepassword.vue'], resolve)
-        }
+        },{
+            path: '/accountmanager/list1',
+            name: 'accountlist1',
+            meta: {
+                title: '用户列表'
+            },
+            component: (resolve) => require(['./views/accountmanager/list1.vue'], resolve)
+        },
     ]
 },{
     path: '/login',
