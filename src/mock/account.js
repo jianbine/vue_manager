@@ -22,7 +22,7 @@ const List = [
     {
         id: '7',
         uid: '26042702139228167',
-        username: 'username',
+        username: 'test',
         password: 'e10adc3949ba59abbe56e057f20f883e',
         urole: '2',//普通用户
         status: '1',

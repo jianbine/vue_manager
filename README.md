@@ -16,6 +16,17 @@ $ npm run dev
 
 npm run build
 
+# 测试账号
+
+- 超级管理员：admin
+
+- 普通管理员：mibine
+
+- 普通用户：test
+
+（PS：测试密码均为123456）
+
+
 # 踩坑记录
 1、
 

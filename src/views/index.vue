@@ -70,7 +70,9 @@
                     <div style="text-align:right">
                         <Avatar src="/static/avator.jpg" />
                         <span>jerry@mibine.com</span>
-                        <router-link to="/login"><Icon type="log-out" style="font-size: 30px;vertical-align: middle;margin-left: 10px;"></Icon></router-link>
+                        <a href="javascript:void(0);">
+                            <Icon @click="logout()" type="log-out" style="font-size: 30px;vertical-align: middle;margin-left: 10px;"></Icon>
+                        </a>
                     </div>
                     <div>
                     </div>
@@ -86,6 +88,8 @@
     </div>
 </template>
 <script>
+    import { removeToken } from '@/utils/auth';
+
     export default {
         data () {
             return {
@@ -185,6 +189,10 @@
         methods: {
             smallKey: function (key1, key2) {
                 return key1 + "-" +key2
+            },
+            logout: function () {
+                removeToken();
+                this.$router.push('/login');
             }
         },
         computed: {
